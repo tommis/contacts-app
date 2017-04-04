@@ -1,0 +1,29 @@
+<md-card>
+  <md-card-header>
+    <md-card-title><h2>Add contact</h2></md-card-title>
+  </md-card-header>
+
+  <md-card-content>
+    <form flex layout="row">
+      <md-input-container>
+        <input mdInput name="firstname" [(ngModel)]="formUser.firstname" placeholder="First name" value="">
+      </md-input-container>
+      <md-input-container>
+        <input mdInput name="lastname" [(ngModel)]="formUser.lastname" placeholder="Last name" value="">
+      </md-input-container>
+      <md-input-container>
+        <input mdInput name="age" [(ngModel)]="formUser.age" min="0" max="120" placeholder="Age" value="">
+      </md-input-container>
+      <md-input-container>
+        <input mdInput name="address" [(ngModel)]="formUser.address" placeholder="Address" value="">
+      </md-input-container>
+    </form>
+  </md-card-content>
+
+  <md-card-actions>
+    <button md-raised-button (click)="addContact($event)">Action</button>
+  </md-card-actions>
+</md-card>
+
+<contact-list [contacts]="contacts" (select)="selectContact($event)"></contact-list>
+
