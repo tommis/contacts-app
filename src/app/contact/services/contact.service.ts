@@ -1,17 +1,11 @@
 import { Injectable } from '@angular/core';
-
 import { Contact } from '../contact';
 
 @Injectable()
 export class ContactService {
   contacts: Contact[] = [];
 
-  formUser = {
-    firstname: "",
-    lastname: "",
-    age: 0,
-    address: ""
-  }
+  contact: Contact;
 
   constructor() { }
 
@@ -19,23 +13,17 @@ export class ContactService {
     return this.contacts;
   }
 
-  public addContact() {
-    this.contacts.push(
-      new Contact(0,
-        this.formUser.firstname,
-        this.formUser.lastname,
-        this.formUser.age,
-        this.formUser.address
-      )
-    );
+  public addContact(contact: Contact) {
+    this.contacts.push(contact);
 
+    this.contact = new Contact(0);
   }
 
   public editContact(contact: Contact) {
-    alert("edited");
+    alert("edited" + contact);
   }
 
   public deleteContact(contact: Contact) {
-    alert("deleted");
+    delete this.contacts[0];
   }
 }

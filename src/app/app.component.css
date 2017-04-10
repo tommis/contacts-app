@@ -1,0 +1,10 @@
+.r {
+  height: 100%;
+}
+
+
+.add-button {
+  position: absolute;
+  right: 20px;
+  bottom: 10px;
+}

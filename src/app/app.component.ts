@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Contact } from './contact/contact';
 import { ContactService } from "./contact/services/contact.service";
+import { MdDialog } from "@angular/material";
+import { ContactDialogComponent } from "./contact/contact-dialog/contact-dialog.component";
+
 
 @Component({
   selector: 'app-root',
@@ -8,23 +11,24 @@ import { ContactService } from "./contact/services/contact.service";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  contacts: Contact[];
+  private contacts: Contact[];
+
   selectedContact: Contact;
 
-  addContact;
-  editContact;
   deleteContact;
 
-  constructor(contactService: ContactService) {
+  constructor(contactService: ContactService, public dialog: MdDialog) {
     this.contacts = contactService.getContacts();
 
-    this.addContact = contactService.addContact;
-    this.editContact = contactService.editContact;
     this.deleteContact = contactService.deleteContact;
   }
 
+  contactDialog() {
+    this.dialog.open(ContactDialogComponent);
+  }
 
   selectContact(contact: Contact) {
     this.selectedContact = contact;
   }
+
 }
