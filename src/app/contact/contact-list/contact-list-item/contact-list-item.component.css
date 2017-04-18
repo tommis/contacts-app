@@ -1,0 +1,11 @@
+.contact {
+  width: 400px;
+}
+
+.contact_age::before {
+  content: "Age: "
+}
+
+.contact_address::before {
+  content: "Address: "
+}

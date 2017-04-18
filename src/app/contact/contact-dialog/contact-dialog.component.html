@@ -1,32 +1,38 @@
-<md-card>
-  <md-card-header>
-    <md-card-title><h2>Add contact</h2></md-card-title>
-  </md-card-header>
+<h2 md-dialog-title>Add contact</h2>
 
-  <md-card-content>
-    <form flex layout="row">
-      <md-input-container>
-        <input mdInput name="firstname" [(ngModel)]="formUser.firstName" placeholder="First name" value="">
-      </md-input-container>
-      <md-input-container>
-        <input mdInput name="lastname" [(ngModel)]="formUser.lastName" placeholder="Last name" value="">
-      </md-input-container>
-      <md-input-container>
-        <input mdInput name="age" [(ngModel)]="formUser.age" min="0" max="120" placeholder="Age" value="">
-      </md-input-container>
-      <md-input-container>
-        <input mdInput name="address" [(ngModel)]="formUser.address" placeholder="Address" value="">
-      </md-input-container>
-    </form>
-  </md-card-content>
+<form flex layout="row">
+  <table>
+    <tr>
+       <td>
+        <md-input-container>
+          <input mdInput name="firstname" [(ngModel)]="contact.firstName" placeholder="First name">
+        </md-input-container>
+        <md-input-container>
+          <input mdInput name="lastname" [(ngModel)]="contact.lastName" placeholder="Last name">
+        </md-input-container>
+     </td>
+    </tr>
+    <tr>
+      <td>
+        <md-input-container class="full-width">
+          <input mdInput name="age" [(ngModel)]="contact.age" min="0" max="120" placeholder="Age">
+        </md-input-container>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <md-input-container class="full-width">
+          <input mdInput name="address" [(ngModel)]="contact.address" placeholder="Address">
+        </md-input-container>
+      </td>
+    </tr>
+  </table>
+</form>
 
-  <md-card-actions>
-    <button md-raised-button (click)="addContact($event)">
-      <md-icon>check</md-icon>
-    </button>
+<button md-icon-button (click)="addNewContact(contact)">
+  <md-icon class="material-icons">Add</md-icon>
+</button>
 
-    <button md-icon-button md-mini-fab color="warn" md-dialog-close>
-      <md-icon  class="material-icons">cancel</md-icon>
-    </button>
-  </md-card-actions>
-</md-card>
+<button md-icon-button md-mini-fab color="warn" md-dialog-close>
+  <md-icon class="material-icons">cancel</md-icon>
+</button>

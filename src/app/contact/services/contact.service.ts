@@ -1,22 +1,31 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
 import { Contact } from '../contact';
 
 @Injectable()
 export class ContactService {
-  contacts: Contact[] = [];
+ // contacts;
 
-  contact: Contact;
 
-  constructor() { }
+  constructor() {
+  //  this.contacts = [new Contact(0, "tommi", "saira", 21, "lpr"), new Contact(1, "valtteri", "virtanen", 0, ""), new Contact(0, "", "", 0, "")];
 
-  public getContacts(): Contact[] {
-    return this.contacts;
+    let c = localStorage.getItem("contacts");
+
+    if(c.length)
   }
 
-  public addContact(contact: Contact) {
-    this.contacts.push(contact);
+  getContacts () {
+    console.log("hei");
 
-    this.contact = new Contact(0);
+    let contacts = localStorage.getItem("contacts");
+
+    return contacts;
+  }
+
+  addContact(contact: Contact) {
+    console.log(contact);
+    let contacts = JSON.parse(this.getContacts());
+
   }
 
   public editContact(contact: Contact) {
@@ -24,6 +33,6 @@ export class ContactService {
   }
 
   public deleteContact(contact: Contact) {
-    delete this.contacts[0];
+   // delete this.contacts[0];
   }
 }

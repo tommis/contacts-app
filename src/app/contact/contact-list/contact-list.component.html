@@ -1,4 +1,4 @@
-<div fxLayout="row" fxLayoutWrap>
+<div fxLayout="column" fxLayoutAlign="space-between center">
     <contact-list-item *ngFor="let contact of contacts;"
                      [contact]="contact"
                      (click)="selectContact(contact)"></contact-list-item>

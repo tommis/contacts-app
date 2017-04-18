@@ -1,18 +1,15 @@
-<md-card>
+<md-card class="contact">
   <md-card-header>
     <md-card-title>{{ contact.firstName }} {{ contact.lastName }}</md-card-title>
     <md-card-subtitle></md-card-subtitle>
   </md-card-header>
-  <img md-card-image src="">
+  <img md-card-image src="assets/img/1.jpg">
   <md-card-content>
-     <div>{{ contact.age }}</div>
-     <div>{{ contact.address }}</div>
+     <div class="contact_age">{{ contact.age }}</div>
+     <div class="contact_address">{{ contact.address }}</div>
   </md-card-content>
   <md-card-actions align="start">
      <button md-button >Edit</button>
      <button md-button >Delete</button>
   </md-card-actions>
-  <md-card-footer>
-    Footer
-  </md-card-footer>
 </md-card>

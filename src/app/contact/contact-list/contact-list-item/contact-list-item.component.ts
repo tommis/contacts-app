@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { Contact } from "../../contact";
+import {MdCardModule} from '@angular/material';
+
 
 @Component({
   selector: 'contact-list-item',

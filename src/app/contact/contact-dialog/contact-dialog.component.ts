@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MdDialogRef } from "@angular/material";
 import { ContactService } from "../services/contact.service";
 import { Contact } from "../contact";
@@ -9,13 +9,14 @@ import { Contact } from "../contact";
   styleUrls: ['./contact-dialog.component.css']
 })
 export class ContactDialogComponent {
-  contact: Contact;
+  @Input() contact: Contact;
 
-  addContact;
 
-  constructor(public dialogRef: MdDialogRef<ContactDialogComponent>, contactService: ContactService) {
+  constructor(public dialogRef: MdDialogRef<ContactDialogComponent>, private contactService: ContactService) {
 
-    this.addContact = contactService.addContact;
   }
 
+  addNewContact(contact: Contact){
+    this.contactService.addContact(contact);
+  }
 }

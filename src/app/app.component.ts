@@ -11,7 +11,7 @@ import { ContactDialogComponent } from "./contact/contact-dialog/contact-dialog.
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  private contacts: Contact[];
+  private contacts;
 
   selectedContact: Contact;
 
@@ -21,10 +21,14 @@ export class AppComponent {
     this.contacts = contactService.getContacts();
 
     this.deleteContact = contactService.deleteContact;
+
   }
 
+  private dialogRef;
   contactDialog() {
-    this.dialog.open(ContactDialogComponent);
+    this.dialogRef = this.dialog.open(ContactDialogComponent);
+    this.dialogRef.componentInstance.contact = new Contact(0, "", "", 0, "");
+    return this.dialogRef.afterClosed();
   }
 
   selectContact(contact: Contact) {
