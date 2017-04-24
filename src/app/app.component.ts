@@ -11,17 +11,13 @@ import { ContactDialogComponent } from "./contact/contact-dialog/contact-dialog.
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  private contacts;
+  private contacts: Contact[];
 
   selectedContact: Contact;
 
-  deleteContact;
 
-  constructor(contactService: ContactService, public dialog: MdDialog) {
+  constructor(private contactService: ContactService, public dialog: MdDialog) {
     this.contacts = contactService.getContacts();
-
-    this.deleteContact = contactService.deleteContact;
-
   }
 
   private dialogRef;
@@ -29,6 +25,10 @@ export class AppComponent {
     this.dialogRef = this.dialog.open(ContactDialogComponent);
     this.dialogRef.componentInstance.contact = new Contact(0, "", "", 0, "");
     return this.dialogRef.afterClosed();
+  }
+
+  deleteContact(contact: Contact) {
+    this.contactService.deleteContact(contact);
   }
 
   selectContact(contact: Contact) {

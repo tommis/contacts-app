@@ -18,5 +18,10 @@ export class ContactDialogComponent {
 
   addNewContact(contact: Contact){
     this.contactService.addContact(contact);
+    this.dialogRef.close();
+  }
+
+  isValid() {
+
   }
 }

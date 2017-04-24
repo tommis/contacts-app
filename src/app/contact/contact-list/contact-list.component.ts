@@ -8,15 +8,18 @@ import { Contact } from '../contact';
 })
 export class ContactListComponent implements OnInit {
   @Input() contacts: Contact[];
-  @Output() select: EventEmitter<Contact>;
+  @Output() select: EventEmitter<Contact> = new EventEmitter();
 
+  @Output() editContact: EventEmitter<Contact> = new EventEmitter();
+  @Output() removeContact: EventEmitter<Contact> = new EventEmitter();
+  @Output() showContactOnMap: EventEmitter<Contact> = new EventEmitter();
 
   constructor() {
-    this.select = new EventEmitter();
   }
 
   ngOnInit() {
   }
+
 
   selectContact(contact: Contact) {
     this.select.emit(contact);

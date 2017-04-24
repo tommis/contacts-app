@@ -1,0 +1,15 @@
+.contact {
+  width: 400px;
+}
+
+.header-image {
+  background-size: cover;
+}
+
+.contact_age::before {
+  content: "Age: ";
+}
+
+.contact_address::before {
+  content: "Address: ";
+}
