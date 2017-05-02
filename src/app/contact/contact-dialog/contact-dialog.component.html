@@ -1,14 +1,14 @@
-<h2 md-dialog-title>Add contact</h2>
+<h1 md-dialog-title>{{contact.id ? 'Edit Contact' : 'New Contact'}}</h1>
 
-<form flex layout="row">
+<form flex layout="row" #contactForm="ngForm">
   <table>
     <tr>
        <td>
         <md-input-container>
-          <input mdInput name="firstname" [(ngModel)]="contact.firstName" placeholder="First name">
+          <input mdInput required name="firstname" [(ngModel)]="contact.firstName" placeholder="First name">
         </md-input-container>
         <md-input-container>
-          <input mdInput name="lastname" [(ngModel)]="contact.lastName" placeholder="Last name">
+          <input mdInput required name="lastname" [(ngModel)]="contact.lastName" placeholder="Last name">
         </md-input-container>
      </td>
     </tr>
@@ -26,13 +26,20 @@
         </md-input-container>
       </td>
     </tr>
+    <tr>
+      <td>
+          <md-select required class="full-width" [(ngModel)]="contact.cardColor" name="cardColor" placeholder="color" [style.color]="contact.cardColor">
+            <md-option *ngFor="let opt of colorOptions" [value]="opt.value" [style.background-color]="opt.value">{{ opt.color }}</md-option>
+          </md-select>
+      </td>
+    </tr>
   </table>
 </form>
 
-<button md-icon-button (click)="addNewContact(contact)">
-  <md-icon class="material-icons">Add</md-icon>
+<button md-button (click)="addNewContact(contact)" [disabled]="isValid">
+  <md-icon class="material-icons">add</md-icon> Add
 </button>
 
-<button md-icon-button md-mini-fab color="warn" md-dialog-close>
-  <md-icon class="material-icons">cancel</md-icon>
+<button md-button color="warn" md-dialog-close>
+  <md-icon class="material-icons">cancel</md-icon> Cancel
 </button>

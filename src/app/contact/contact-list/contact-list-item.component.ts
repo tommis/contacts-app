@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Contact } from "../contact";
 import { MdCardModule } from '@angular/material';
 
@@ -11,9 +11,9 @@ import { MdCardModule } from '@angular/material';
 export class ContactListItemComponent implements OnInit {
   @Input() contact: Contact;
 
-  @Input() edit: EventEmitter<Contact>;
-  @Input() remove: EventEmitter<Contact>;
-  @Input() showOnMap: EventEmitter<Contact>;
+  @Input() delete: EventEmitter<Contact> = new EventEmitter();
+  @Input() edit: EventEmitter<Contact> = new EventEmitter();
+  //@Input() showOnMap: EventEmitter<Contact>;
 
   constructor() { }
 
@@ -21,15 +21,16 @@ export class ContactListItemComponent implements OnInit {
     console.log(this.contact);
   }
 
+  deleteContact() {
+    this.delete.emit(this.contact);
+  }
   editContact() {
     this.edit.emit(this.contact);
   }
 
-  removeContact() {
-    this.remove.emit(this.contact);
-  }
 
-  showContactOnMap() {
+
+/*  showContactOnMap() {
     this.showOnMap.emit(this.contact);
-  }
+  }*/
 }

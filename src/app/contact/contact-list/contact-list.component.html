@@ -1,12 +1,16 @@
-<div fxLayout="column" fxLayoutAlign="space-between center"  *ngIf="contacts.length > 1">
+<div *ngIf="contacts?.length > 1; else noContacts" fxLayout="column" fxLayoutAlign="space-between center"  fxLayoutGap="10px">
     <contact-list-item
-      *ngFor="let contact of contacts;"
+      *ngFor="let contact of contacts"
         [contact]="contact"
-        [edit]="editContact"
-        [remove]="removeContact"
-        [showOnMap]="showContactOnMap"
+        [edit]="EditContact"
+        [delete]="DeleteContact"
         (click)="selectContact(contact)"></contact-list-item>
    <div *ngIf="i < contacts.length-1">
     <br>
   </div>
 </div>
+
+
+<template #noContacts>
+  You haven't added any contacts yet.
+</template>

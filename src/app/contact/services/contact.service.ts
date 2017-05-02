@@ -2,24 +2,21 @@
 import { Injectable, Input, OnInit } from '@angular/core';
 import { Contact } from '../contact';
 import { MdSnackBar } from "@angular/material";
-import { isNullOrUndefined } from "util";
-import { and } from "@angular/router/src/utils/collection";
+import { Observable } from "rxjs";
+import * as _ from 'lodash';
+import { ContactStore } from "./contact-store";
 
 @Injectable()
-export class ContactService implements OnInit {
+export class ContactService implements ContactStore {
  // contacts;
 
   private cKey= "contacts";
 
   constructor(public snackBar: MdSnackBar) {
-  //  this.contacts = [new Contact(0, "tommi", "saira", 21, "lpr"), new Contact(1, "valtteri", "virtanen", 0, ""), new Contact(0, "", "", 0, "")];
     let c = localStorage.getItem(this.cKey);
-    if (this.isJSON(c) && c.length < 15)
+    if (c.length < 15 && this.isJSON(c))
       localStorage.setItem(this.cKey, JSON.stringify({"contacts": []}));
 
-  }
-
-  ngOnInit() {
   }
 
   isJSON(str) : boolean {
@@ -31,25 +28,52 @@ export class ContactService implements OnInit {
     return true;
   }
 
-  getContacts() : Contact[] {
+  readContacts() {
     let contacts = JSON.parse(localStorage.getItem(this.cKey));
-    return contacts as Contact[];
+    return contacts;
   }
 
-  addContact(contact: Contact) {
+  writeContacts(contacts) {
+    return localStorage.setItem(this.cKey, JSON.stringify(contacts));
+  }
+
+  getContacts() : Observable<Contact[]> {
+    return Observable.of(this.readContacts());
+  }
+
+  /*addContact(contact: Contact) {
     let contacts = this.getContacts();
-    contacts.push(contact);
-    localStorage.setItem(this.cKey, JSON.stringify(contacts));
+    //contacts.map(val => ;
+    //contacts.map(c => c.push(contact));
+    this.writeContacts([]);
+
     this.openSnackBar("Added contact", "close");
     console.log("Adding contact: X" + JSON.stringify(contact));
+  }*/
+
+  addContact(contact: Contact) : Observable<Contact[]> {
+    let contacts = this.readContacts();
+    if (!contact.id) {
+      let lastSaved = <Contact>_.maxBy(contacts, 'id');
+      contact.id = lastSaved ? lastSaved.id + 1 : 1;
+      contacts.push(contact);
+    } else {
+      contacts = _.map(contacts, function (c: Contact) {
+        return c.id == contact.id ? contact : c;
+      });
+    }
+    this.writeContacts(contacts);
+    return contacts;
   }
 
-  public editContact(contact: Contact) {
+
+  public editContact(contact: Contact){
     alert("edited" + contact);
   }
 
-  public deleteContact(contact: Contact) {
+  public deleteContact(contact: Contact) : Observable<any> {
    // delete this.contacts[0];
+    return Observable.of([]);
   }
 
   openSnackBar(message: string, action: string) {

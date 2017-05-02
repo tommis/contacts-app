@@ -2,14 +2,18 @@
   width: 400px;
 }
 
+.contact-name {
+  font-size: 4em;
+}
+
 .header-image {
   background-size: cover;
 }
 
-.contact_age::before {
+.contact-age::before {
   content: "Age: ";
 }
 
-.contact_address::before {
+.contact-address::before {
   content: "Address: ";
 }
