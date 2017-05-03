@@ -1,7 +1,7 @@
 <div class="r">
   <contact-list [contacts]="contacts"
-                (editContact)="onEditContact($event)"
                 (deleteContact)="onDeleteContact($event)"
+                (editContact)="onEditContact($event)"
                 (select)="selectContact($event)"></contact-list>
 
   <button md-fab class="add-button" (click)="contactDialog($event)">

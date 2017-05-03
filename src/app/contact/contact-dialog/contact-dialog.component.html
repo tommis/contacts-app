@@ -1,4 +1,4 @@
-<h1 md-dialog-title>{{contact.id ? 'Edit Contact' : 'New Contact'}}</h1>
+<h1 md-dialog-title>{{contact.id !== null ? 'Edit Contact' : 'New Contact'}}</h1>
 
 <form flex layout="row" #contactForm="ngForm">
   <table>
@@ -36,10 +36,18 @@
   </table>
 </form>
 
-<button md-button (click)="addNewContact(contact)" [disabled]="isValid">
-  <md-icon class="material-icons">add</md-icon> Add
-</button>
+<div class="buttons" *ngIf="contact.id !== null; else editButtons;">
+  <button md-button (click)="handleContact(contact)" [disabled]="isValid">
+    <md-icon class="material-icons">add</md-icon> Add
+  </button>
 
-<button md-button color="warn" md-dialog-close>
-  <md-icon class="material-icons">cancel</md-icon> Cancel
-</button>
+  <button md-button color="warn" md-dialog-close>
+    <md-icon class="material-icons">cancel</md-icon> Cancel
+  </button>
+</div>
+
+<template class="buttons" #editButtons>
+   <button md-button md-dialog-close>
+    <md-icon class="material-icons">add</md-icon> I'm done editing
+  </button>
+</template>

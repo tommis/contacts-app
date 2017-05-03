@@ -2,6 +2,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Contact } from "../contact";
 import { MdCardModule } from '@angular/material';
 
+declare module String{
+    export var format:any;
+}
 
 @Component({
   selector: 'contact-list-item',
@@ -11,9 +14,10 @@ import { MdCardModule } from '@angular/material';
 export class ContactListItemComponent implements OnInit {
   @Input() contact: Contact;
 
-  @Input() delete: EventEmitter<Contact> = new EventEmitter();
-  @Input() edit: EventEmitter<Contact> = new EventEmitter();
-  //@Input() showOnMap: EventEmitter<Contact>;
+  @Input() delete: EventEmitter<Contact>;
+  @Input() edit: EventEmitter<Contact>;
+
+  @Input() mapsUpdate: EventEmitter<Date>;
 
   constructor() { }
 
@@ -28,9 +32,13 @@ export class ContactListItemComponent implements OnInit {
     this.edit.emit(this.contact);
   }
 
+  mapsImage() : string {
+    let address = this.contact.address;
+    let mapsUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${address}&size=400x175`;
+
+    this.mapsUpdate.emit(Date.now());
+    return mapsUrl;
+  }
 
 
-/*  showContactOnMap() {
-    this.showOnMap.emit(this.contact);
-  }*/
 }

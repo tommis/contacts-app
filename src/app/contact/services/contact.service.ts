@@ -5,10 +5,10 @@ import { MdSnackBar } from "@angular/material";
 import { Observable } from "rxjs";
 import * as _ from 'lodash';
 import { ContactStore } from "./contact-store";
+import { List } from 'linqts';
 
 @Injectable()
 export class ContactService implements ContactStore {
- // contacts;
 
   private cKey= "contacts";
 
@@ -41,16 +41,6 @@ export class ContactService implements ContactStore {
     return Observable.of(this.readContacts());
   }
 
-  /*addContact(contact: Contact) {
-    let contacts = this.getContacts();
-    //contacts.map(val => ;
-    //contacts.map(c => c.push(contact));
-    this.writeContacts([]);
-
-    this.openSnackBar("Added contact", "close");
-    console.log("Adding contact: X" + JSON.stringify(contact));
-  }*/
-
   addContact(contact: Contact) : Observable<Contact[]> {
     let contacts = this.readContacts();
     if (!contact.id) {
@@ -67,13 +57,17 @@ export class ContactService implements ContactStore {
   }
 
 
-  public editContact(contact: Contact){
-    alert("edited" + contact);
+  public editContact(contact: Contact) {
+    ////let contactOld = this.readContacts().where(c => c.);
+
+    return;
   }
 
   public deleteContact(contact: Contact) : Observable<any> {
-   // delete this.contacts[0];
-    return Observable.of([]);
+    let contacts = this.readContacts();
+    return Observable.of(
+      this.writeContacts(contacts.Where(c => c == contact).Remove())
+    );
   }
 
   openSnackBar(message: string, action: string) {

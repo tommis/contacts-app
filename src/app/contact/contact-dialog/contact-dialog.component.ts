@@ -42,19 +42,20 @@ export class ContactDialogComponent implements OnInit {
 
 
   ngOnInit(): void {
-    if (!this.contact) {
-      this.contact = new Contact();
-    }
     this.validate();
   }
 
-  addNewContact(contact: Contact){
-    this.contactService.addContact(contact);
+  handleContactSubmit(contact) {
+    if (contact.id)
+      this.contactService.editContact(contact);
+    else
+      this.contactService.addContact(contact);
+
     this.dialogRef.close();
   }
 
   validate() {
-    this.isValid = !(this.contact.firstName && this.contact.lastName);
+    this.isValid = !(this.contact.firstName && this.contact.lastName && this.contact.cardColor);
   }
 
   ngAfterViewChecked() {
@@ -68,11 +69,6 @@ export class ContactDialogComponent implements OnInit {
       this.contactForm.valueChanges
         .subscribe(data => this.validate());
     }
-  }
-
-
-  getRandomIndex(length) {
-    return Math.floor(Math.random() * length);
   }
 
 }

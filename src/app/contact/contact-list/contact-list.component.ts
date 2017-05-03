@@ -11,10 +11,16 @@ export class ContactListComponent implements OnInit {
 
   @Output() select: EventEmitter<Contact> = new EventEmitter();
 
-  @Output() editContact: EventEmitter<Contact> = new EventEmitter();
-  @Output() deleteContact: EventEmitter<Contact> = new EventEmitter();
+  @Output() editContact: EventEmitter<Contact>;
+  @Output() deleteContact: EventEmitter<Contact>;
 
-  constructor() { }
+  @Output() mapsUpdate: EventEmitter<Date>;
+
+  constructor() {
+    this.editContact = new EventEmitter();
+    this.deleteContact = new EventEmitter();
+    this.mapsUpdate = new EventEmitter();
+  }
 
   ngOnInit() { }
 

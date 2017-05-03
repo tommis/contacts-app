@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
 
   selectedContact: Contact;
 
+  mapsLastUpdated: Date;
 
   constructor(private contactService: ContactService, public dialog: MdDialog) {
   }
@@ -24,9 +25,13 @@ export class AppComponent implements OnInit {
   }
 
   private dialogRef;
-  contactDialog() {
+  contactDialog(editContact?: Contact) {
     this.dialogRef = this.dialog.open(ContactDialogComponent);
-    this.dialogRef.componentInstance.contact = new Contact();
+    if (editContact.id  === null)
+      this.dialogRef.componentInstance.contact = new Contact();
+    else
+      this.dialogRef.componentInstance.contact = editContact;
+
     return this.dialogRef.afterClosed();
   }
 
@@ -35,14 +40,20 @@ export class AppComponent implements OnInit {
   }
 
   onDeleteContact(contact: Contact) {
-    //this.contactService.deleteContact(contact).subscribe(this.contactService.getContacts());
+    this.contactService.deleteContact(contact);
+    console.log("hello");
   }
   onEditContact(contact: Contact) {
-    this.selectedContact = contact;
-    console.log("hello");
+    console.log("Editing contact " + contact.id);
+    this.contactDialog(contact);
+    this.contactService.editContact(contact);
   }
   selectContact(contact: Contact) {
     this.selectedContact = contact;
+  }
+
+  mapUpdate(time: Date) {
+    this.mapsLastUpdated = time;
   }
 
 

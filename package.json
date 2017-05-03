@@ -26,6 +26,7 @@
     "@angular/platform-server": "^4.0.1",
     "@angular/router": "^4.0.1",
     "core-js": "^2.4.1",
+    "linqts": "^1.8.2",
     "lodash": "^4.17.4",
     "rxjs": "^5.1.0",
     "typescript": "^2.2.2",

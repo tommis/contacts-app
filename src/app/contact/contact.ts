@@ -1,4 +1,14 @@
-export class Contact {
+interface ContactI {
+  id: number;
+
+  firstName: string;
+  lastName: string;
+  age: number;
+  address: string;
+  cardColor: string;
+}
+
+export class Contact implements ContactI {
   id: number;
 
   firstName: string;

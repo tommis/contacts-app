@@ -1,12 +1,28 @@
 .contact {
-  width: 400px;
+  padding: 0;
+  width: 500px;
+}
+
+.contact-header {
+  padding: 24px 24px 10px 24px;
+}
+
+.contact-content {
+  padding: 0 24px 24px 24px;
+  margin: 0;
+}
+
+.contact-buttons {
+  padding: 12px 24px 24px 24px !important;
 }
 
 .contact-name {
-  font-size: 4em;
+  font-size: 25px !important;
 }
 
 .header-image {
+  margin: 0;
+  width: 500px;
   background-size: cover;
 }
 
@@ -17,3 +33,4 @@
 .contact-address::before {
   content: "Address: ";
 }
+

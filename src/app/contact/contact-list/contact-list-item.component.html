@@ -1,15 +1,16 @@
-<md-card class="contact" [style.background-color]="contact.cardColor">
-  <md-card-header class="contact-header">
+<md-card class="contact">
+  <md-card-header class="contact-header"  [style.background-color]="contact.cardColor">
     <md-card-title class="contact-name">{{ contact.firstName }} {{ contact.lastName }}</md-card-title>
-    <md-card-subtitle></md-card-subtitle>
+    <md-card-subtitle class="contact-age" *ngIf="contact.age">{{ contact.age }}</md-card-subtitle>
   </md-card-header>
-  <img md-card-image src="assets/img/1.jpg"  class="header-image">
+  <div *ngIf="contact.address">
+    <md-card-content class="contact-content"  [style.background-color]="contact.cardColor">
+       <div class="contact-address">{{ contact.address }}</div>
+    </md-card-content>
+    <img md-card-image [src]="mapsImage()"  class="header-image">
+  </div>
 
-  <md-card-content>
-     <div class="contact-age">{{ contact.age }}</div>
-     <div class="contact-address">{{ contact.address }}</div>
-  </md-card-content>
-  <md-card-actions align="start">
+  <md-card-actions align="start" class="contact-buttons">
      <div>
         <button md-button (click)="deleteContact()">
           <md-icon>delete</md-icon> Delete
