@@ -17,7 +17,7 @@ export class ContactListItemComponent implements OnInit {
   @Input() delete: EventEmitter<Contact>;
   @Input() edit: EventEmitter<Contact>;
 
-  @Input() mapsUpdate: EventEmitter<Date>;
+  @Input() mapsUpdate: EventEmitter<Number>;
 
   constructor() { }
 

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Contact } from '../contact';
+import { List } from "linqts";
 
 @Component({
   selector: 'contact-list',

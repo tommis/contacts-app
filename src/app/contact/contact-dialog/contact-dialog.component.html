@@ -37,7 +37,7 @@
 </form>
 
 <div class="buttons" *ngIf="contact.id !== null; else editButtons;">
-  <button md-button (click)="handleContact(contact)" [disabled]="isValid">
+  <button md-button (click)="handleContactSubmit(contact)" [disabled]="isValid">
     <md-icon class="material-icons">add</md-icon> Add
   </button>
 

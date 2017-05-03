@@ -3,6 +3,7 @@ import { Contact } from './contact/contact';
 import { ContactService } from "./contact/services/contact.service";
 import { MdDialog } from "@angular/material";
 import { ContactDialogComponent } from "./contact/contact-dialog/contact-dialog.component";
+import { List } from "linqts";
 
 
 @Component({
@@ -36,12 +37,13 @@ export class AppComponent implements OnInit {
   }
 
   private reloadContacts() {
-    this.contactService.getContacts().subscribe(contacts => this.contacts = contacts);
+    this.contactService.getContacts().subscribe(contacts => this.contacts = contacts.ToArray());
   }
 
   onDeleteContact(contact: Contact) {
-    this.contactService.deleteContact(contact);
+    this.contactService.deleteContact(contact).subscribe(contacts => this.reloadContacts());
     console.log("hello");
+
   }
   onEditContact(contact: Contact) {
     console.log("Editing contact " + contact.id);

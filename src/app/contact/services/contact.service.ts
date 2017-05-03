@@ -29,7 +29,7 @@ export class ContactService implements ContactStore {
   }
 
   readContacts() {
-    let contacts = JSON.parse(localStorage.getItem(this.cKey));
+    let contacts = new List<Contact>(JSON.parse(localStorage.getItem(this.cKey)));
     return contacts;
   }
 
@@ -37,38 +37,38 @@ export class ContactService implements ContactStore {
     return localStorage.setItem(this.cKey, JSON.stringify(contacts));
   }
 
-  getContacts() : Observable<Contact[]> {
+  getContacts() : Observable<List<Contact>> {
     return Observable.of(this.readContacts());
   }
 
-  addContact(contact: Contact) : Observable<Contact[]> {
+  addContact(contact: Contact) : Observable<List<Contact>> {
     let contacts = this.readContacts();
     if (!contact.id) {
-      let lastSaved = <Contact>_.maxBy(contacts, 'id');
-      contact.id = lastSaved ? lastSaved.id + 1 : 1;
-      contacts.push(contact);
+      let lastSaved = contacts.Select(c => c.id != null).Max();
+      contact.id = lastSaved ? lastSaved + 1 : 1;
+      contacts.Add(contact);
     } else {
       contacts = _.map(contacts, function (c: Contact) {
         return c.id == contact.id ? contact : c;
       });
     }
     this.writeContacts(contacts);
-    return contacts;
+    return Observable.of(contacts);
   }
 
-
   public editContact(contact: Contact) {
-    ////let contactOld = this.readContacts().where(c => c.);
 
     return;
   }
 
   public deleteContact(contact: Contact) : Observable<any> {
     let contacts = this.readContacts();
+
     return Observable.of(
-      this.writeContacts(contacts.Where(c => c == contact).Remove())
+      this.writeContacts(contacts.Where(c => c.id != contact.id).ToArray())
     );
   }
+
 
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
