@@ -11,8 +11,9 @@ import { ContactListComponent } from './contact/contact-list/contact-list.compon
 import { ContactService } from './contact/services/contact.service';
 import { ContactListItemComponent } from './contact/contact-list/contact-list-item.component';
 import { ContactDialogComponent } from './contact/contact-dialog/contact-dialog.component';
-import { MapDialogComponent } from './contact/map-dialog/map-dialog.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MapsImageService } from "./contact/services/maps-image.service";
+import { MapsImageComponent } from './contact/maps-image/maps-image.component';
 
 
 @NgModule({
@@ -21,7 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ContactListComponent,
     ContactListItemComponent,
     ContactDialogComponent,
-    MapDialogComponent,
+    MapsImageComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,6 +34,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ],
   providers: [
     ContactService,
+    MapsImageService
   ],
   entryComponents: [
     ContactDialogComponent

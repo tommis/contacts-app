@@ -12,7 +12,9 @@
   <p>Showing {{ contacts.length }} contact(s)</p>
 </div>
 
-
-<template #noContacts>
-  You haven't added any contacts yet.
-</template>
+<ng-template #noContacts>
+  <div class="no-contacts">
+    <md-icon>person_pin</md-icon>
+    <p>You haven't added any contacts yet.</p>
+  </div>
+</ng-template>

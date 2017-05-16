@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
     else
       this.dialogRef.componentInstance.contact = editContact;
 
-    return this.dialogRef.afterClosed();
+    return this.dialogRef.afterClosed().subscribe(contacts => this.reloadContacts());
   }
 
   private reloadContacts() {
@@ -48,7 +48,6 @@ export class AppComponent implements OnInit {
   onEditContact(contact: Contact) {
     console.log("Editing contact " + contact.id);
     this.contactDialog(contact);
-    this.contactService.editContact(contact);
   }
   selectContact(contact: Contact) {
     this.selectedContact = contact;

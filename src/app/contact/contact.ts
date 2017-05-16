@@ -4,8 +4,8 @@ interface ContactI {
   firstName: string;
   lastName: string;
   age: number;
-  address: string;
   cardColor: string;
+
 }
 
 export class Contact implements ContactI {
@@ -14,16 +14,22 @@ export class Contact implements ContactI {
   firstName: string;
   lastName: string;
   age: number;
-  address: string;
   cardColor: string;
 
-  constructor(id?: number, firstName?: string, lastName?: string, age?: number, address?: string, cardColor?: string) {
+  address: string;
+  addressValid: boolean;
+  imgCacheKey: string;
+
+  constructor(id?: number, firstName?: string, lastName?: string, age?: number,  cardColor?: string, address?: string, addressValid?: boolean, imgCacheKey?: string) {
     this.id = id;
 
     this.firstName = firstName;
     this.lastName = lastName;
     this.age = age;
-    this.address = address;
     this.cardColor = cardColor;
+
+    this.address = address;
+    this.addressValid = addressValid;
+    this.imgCacheKey = imgCacheKey;
   }
 }

@@ -1,0 +1,13 @@
+.no-contacts {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.no-contacts .mat-icon {
+  font-size: 100px;
+  margin-right: 76px;
+}
+
+.no-contacts p {
+  text-align: center;
+}

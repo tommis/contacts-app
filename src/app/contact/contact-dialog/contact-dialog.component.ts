@@ -3,6 +3,7 @@ import { MdDialogRef } from "@angular/material";
 import { ContactService } from "../services/contact.service";
 import { Contact } from "../contact";
 import { NgForm } from "@angular/forms";
+import { List } from "linqts";
 
 @Component({
   selector: 'app-contact-dialog',
@@ -12,6 +13,8 @@ import { NgForm } from "@angular/forms";
 export class ContactDialogComponent implements OnInit {
   contact: Contact;
   isValid: boolean;
+
+  @Input() contacts: List<Contact>;
 
   contactForm: NgForm;
   @ViewChild('contactForm') currentForm: NgForm;
@@ -38,31 +41,36 @@ export class ContactDialogComponent implements OnInit {
     {"color": "Blue grey", "value" : "#607D8B"},
   ];
 
-  constructor(public dialogRef: MdDialogRef<ContactDialogComponent>, private contactService: ContactService) { this.isValid = false; }
+  constructor(public dialogRef: MdDialogRef<ContactDialogComponent>, public ContactService: ContactService) { this.isValid = false; }
 
 
   ngOnInit(): void {
     this.validate();
+    if(!this.contact) {
+      this.contact = new Contact;
+    }
   }
 
   handleContactSubmit(contact) {
-    if (contact.id)
-      this.contactService.editContact(contact);
-    else
-      this.contactService.addContact(contact);
+    this.ContactService.addContact(contact).finally(
+      () => { this.ContactService.openSnackBar("Added contact", "dismiss") }
+    ).subscribe(
+      contacts => this.contacts = this.ContactService.readContacts()
+
+    );
 
     this.dialogRef.close();
   }
 
-  validate() {
+  validate() : void {
     this.isValid = !(this.contact.firstName && this.contact.lastName && this.contact.cardColor);
   }
 
-  ngAfterViewChecked() {
+  ngAfterViewChecked() : void {
     this.formChanged();
   }
 
-  formChanged() {
+  formChanged() : void {
     if (this.currentForm === this.contactForm) { return; }
     this.contactForm = this.currentForm;
     if (this.contactForm) {
