@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MdDialogRef } from "@angular/material";
 import { ContactService } from "../services/contact.service";
-import { Contact } from "../contact";
+import { Contact } from "../models/contact";
 import { NgForm } from "@angular/forms";
 import { List } from "linqts";
 
@@ -18,6 +18,7 @@ export class ContactDialogComponent implements OnInit {
 
   contactForm: NgForm;
   @ViewChild('contactForm') currentForm: NgForm;
+  defaultColor;
 
   colorOptions = [
     {"color": "Red", "value" : "#F44336"},
@@ -49,11 +50,21 @@ export class ContactDialogComponent implements OnInit {
     if(!this.contact) {
       this.contact = new Contact;
     }
+    else {
+      //this.defaultColor =;
+    }
   }
 
   handleContactSubmit(contact) {
     this.ContactService.addContact(contact).finally(
-      () => { this.ContactService.openSnackBar("Added contact", "dismiss") }
+      () => {
+        if(!contact.id) {
+          this.ContactService.openSnackBar("Added contact", "dismiss");
+        }
+        else {
+          this.ContactService.openSnackBar("Edited contact", "dismiss");
+        }
+      }
     ).subscribe(
       contacts => this.contacts = this.ContactService.readContacts()
 
