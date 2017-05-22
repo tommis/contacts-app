@@ -1,6 +1,6 @@
-///<reference path="../contact.ts"/>
+///<reference path="../models/contact.ts"/>
 import { Injectable, Input, OnInit } from '@angular/core';
-import { Contact } from '../contact';
+import { Contact } from '../models/contact';
 import { MdSnackBar } from "@angular/material";
 import { Observable } from "rxjs";
 import { ContactStore } from "./contact-store";

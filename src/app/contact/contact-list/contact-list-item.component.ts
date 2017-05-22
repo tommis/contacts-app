@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Contact } from "../contact";
+import { Contact } from "../models/contact";
 import { MdCardModule } from '@angular/material';
 import { trigger, state, transition, style, animate, group } from "@angular/animations";
 

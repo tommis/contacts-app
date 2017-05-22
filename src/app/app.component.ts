@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
-import { Contact } from './contact/contact';
+import { Contact } from './contact/models/contact';
 import { ContactService } from "./contact/services/contact.service";
 import { MdDialog } from "@angular/material";
 import { ContactDialogComponent } from "./contact/contact-dialog/contact-dialog.component";

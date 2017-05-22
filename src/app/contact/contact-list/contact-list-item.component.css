@@ -1,6 +1,10 @@
+:host {
+  width: 100% !important;
+  max-width: 500px;
+}
+
 .contact {
   padding: 0;
-  width: 500px;
 }
 
 .contact-header {

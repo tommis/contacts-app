@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from "@angular/http";
-import { Contact } from "../contact";
+import { Contact } from "../models/contact";
 
 @Injectable()
 export class MapsImageService {

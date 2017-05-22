@@ -1,5 +1,5 @@
 import { Observable } from "rxjs/Observable";
-import { Contact } from "../contact";
+import { Contact } from "../models/contact";
 import { List } from "linqts";
 
 export interface ContactStore {
