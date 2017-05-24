@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { Contact } from './contact/models/contact';
-import { ContactService } from "./contact/services/contact.service";
+import { LocalstorageService } from "./contact/services/localstorage.service";
 import { MdDialog } from "@angular/material";
 import { ContactDialogComponent } from "./contact/contact-dialog/contact-dialog.component";
 import { List } from "linqts";
+import { ContactService } from "./contact/services/contact.service";
 
 
 @Component({
@@ -12,13 +13,14 @@ import { List } from "linqts";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  private contacts: Contact[];
+  private contacts;
 
   selectedContact: Contact;
 
   mapsLastUpdated: Date;
 
   constructor(private contactService: ContactService, public dialog: MdDialog) {
+
   }
 
   ngOnInit() {
@@ -28,7 +30,7 @@ export class AppComponent implements OnInit {
   private dialogRef;
   contactDialog(editContact?: Contact) {
     this.dialogRef = this.dialog.open(ContactDialogComponent);
-    if (editContact.id  === null)
+    if (editContact._id  === null)
       this.dialogRef.componentInstance.contact = new Contact();
     else
       this.dialogRef.componentInstance.contact = editContact;
@@ -37,16 +39,18 @@ export class AppComponent implements OnInit {
   }
 
   private reloadContacts() {
-    this.contactService.getContacts().subscribe(contacts => this.contacts = contacts.ToArray());
+    this.contactService.getContacts().subscribe(
+      val => this.contacts = val,
+      err => console.error(err),
+      () =>  console.log(this.contacts));
   }
 
   onDeleteContact(contact: Contact) {
     this.contactService.deleteContact(contact).subscribe(contacts => this.reloadContacts());
     console.log("hello");
-
   }
   onEditContact(contact: Contact) {
-    console.log("Editing contact " + contact.id);
+    console.log("Editing contact " + contact._id);
     this.contactDialog(contact);
   }
   selectContact(contact: Contact) {

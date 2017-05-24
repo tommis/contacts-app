@@ -1,13 +1,13 @@
 <md-card class="contact" [@flyInOut]>
-  <md-card-header class="contact-header"  [style.background-color]="contact.cardColor">
-    <md-card-title class="contact-name">{{ contact.firstName }} {{ contact.lastName }}</md-card-title>
+  <md-card-header class="contact-header"  [style.background-color]="contact.cardcolor">
+    <md-card-title class="contact-name">{{ contact.firstname }} {{ contact.lastname }}</md-card-title>
     <md-card-subtitle class="contact-age" *ngIf="contact.age">{{ contact.age }}</md-card-subtitle>
   </md-card-header>
   <div *ngIf="contact.address">
-    <md-card-content class="contact-content" [style.background-color]="contact.cardColor">
+    <md-card-content class="contact-content" [style.background-color]="contact.cardcolor">
        <div class="contact-address">{{ contact.address }}</div>
     </md-card-content>
-    <maps-image [address]="contact.address"  *ngIf="contact.address.addressValid"></maps-image>
+    <maps-image [address]="contact.address" *ngIf="contact.addressvalid"></maps-image>
 
   </div>
 

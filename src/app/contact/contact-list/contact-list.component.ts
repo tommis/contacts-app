@@ -10,7 +10,7 @@ import { List } from "linqts";
 
 })
 export class ContactListComponent implements OnInit {
-  @Input() contacts: Contact[];
+  @Input() contacts;
 
   @Output() select: EventEmitter<Contact> = new EventEmitter();
 

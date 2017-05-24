@@ -1,35 +1,44 @@
+import DateTimeFormat = Intl.DateTimeFormat;
 interface ContactI {
-  id: number;
+  _id: number;
 
-  firstName: string;
-  lastName: string;
+  firstname: string;
+  lastname: string;
   age: number;
-  cardColor: string;
+  cardcolor: string;
 
 }
 
 export class Contact implements ContactI {
-  id: number;
+  _id: number;
 
-  firstName: string;
-  lastName: string;
+  _created: Date;
+  _updated: Date;
+  _etag: string;
+
+  firstname: string;
+  lastname: string;
   age: number;
-  cardColor: string;
+  cardcolor: string;
 
   address: string;
-  addressValid: boolean;
-  imgCacheKey: string;
+  addressvalid: boolean;
+  imgcachekey: string;
 
-  constructor(id?: number, firstName?: string, lastName?: string, age?: number,  cardColor?: string, address?: string, addressValid?: boolean, imgCacheKey?: string) {
-    this.id = id;
+  constructor(id?: number, created?: Date, updated?: Date, etag?: string, firstName?: string, lastName?: string, age?: number,  cardColor?: string, address?: string, addressValid?: boolean, imgCacheKey?: string) {
+    this._id = id;
 
-    this.firstName = firstName;
-    this.lastName = lastName;
+    this._created = created;
+    this._updated = updated;
+    this._etag = etag;
+
+    this.firstname = firstName;
+    this.lastname = lastName;
     this.age = age;
-    this.cardColor = cardColor;
+    this.cardcolor = cardColor;
 
     this.address = address;
-    this.addressValid = addressValid;
-    this.imgCacheKey = imgCacheKey;
+    this.addressvalid = addressValid;
+    this.imgcachekey = imgCacheKey;
   }
 }

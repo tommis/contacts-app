@@ -26,9 +26,7 @@ export class MapsImageService {
     let res = this.http.get(mapsUrl).subscribe(this.extractData);
 
     if (res) {
-      contact.addressValid = true;
-
-
+      contact.addressvalid = true;
     }
 
     return contact;

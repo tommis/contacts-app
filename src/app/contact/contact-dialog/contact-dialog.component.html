@@ -5,10 +5,10 @@
     <tr>
        <td>
         <md-input-container>
-          <input mdInput required name="firstname" [(ngModel)]="contact.firstName" placeholder="First name">
+          <input mdInput required name="firstname" [(ngModel)]="contact.firstname" placeholder="First name">
         </md-input-container>
         <md-input-container>
-          <input mdInput required name="lastname" [(ngModel)]="contact.lastName" placeholder="Last name">
+          <input mdInput required name="lastname" [(ngModel)]="contact.lastname" placeholder="Last name">
         </md-input-container>
      </td>
     </tr>
@@ -28,7 +28,7 @@
     </tr>
     <tr>
       <td>
-          <md-select required class="full-width" [(ngModel)]="contact.cardColor" name="cardColor" placeholder="color" [style.color]="contact.cardColor">
+          <md-select required class="full-width" [(ngModel)]="contact.cardcolor" name="cardColor" placeholder="color" [style.color]="contact.cardcolor">
             <md-option *ngFor="let opt of colorOptions" [value]="opt.value" [style.background-color]="opt.value">{{ opt.color }}</md-option>
           </md-select>
       </td>

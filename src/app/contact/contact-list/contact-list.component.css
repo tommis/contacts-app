@@ -6,6 +6,7 @@
 .no-contacts .mat-icon {
   font-size: 100px;
   margin-right: 76px;
+  user-select: none;
 }
 
 .no-contacts p {

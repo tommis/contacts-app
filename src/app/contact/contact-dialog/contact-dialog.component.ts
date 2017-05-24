@@ -1,9 +1,10 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { MdDialogRef } from "@angular/material";
-import { ContactService } from "../services/contact.service";
+import { MdDialogRef, MdSnackBar } from "@angular/material";
+import { LocalstorageService } from "../services/localstorage.service";
 import { Contact } from "../models/contact";
 import { NgForm } from "@angular/forms";
 import { List } from "linqts";
+import { ContactService } from "../services/contact.service";
 
 @Component({
   selector: 'app-contact-dialog',
@@ -42,7 +43,7 @@ export class ContactDialogComponent implements OnInit {
     {"color": "Blue grey", "value" : "#607D8B"},
   ];
 
-  constructor(public dialogRef: MdDialogRef<ContactDialogComponent>, public ContactService: ContactService) { this.isValid = false; }
+  constructor(public dialogRef: MdDialogRef<ContactDialogComponent>, public ContactService: ContactService, public snackBar: MdSnackBar) { this.isValid = false; }
 
 
   ngOnInit(): void {
@@ -59,10 +60,10 @@ export class ContactDialogComponent implements OnInit {
     this.ContactService.addContact(contact).finally(
       () => {
         if(!contact.id) {
-          this.ContactService.openSnackBar("Added contact", "dismiss");
+          this.openSnackBar("Added contact", "dismiss");
         }
         else {
-          this.ContactService.openSnackBar("Edited contact", "dismiss");
+          this.openSnackBar("Edited contact", "dismiss");
         }
       }
     ).subscribe(
@@ -74,7 +75,7 @@ export class ContactDialogComponent implements OnInit {
   }
 
   validate() : void {
-    this.isValid = !(this.contact.firstName && this.contact.lastName && this.contact.cardColor);
+    this.isValid = !(this.contact.firstname && this.contact.lastname && this.contact.cardcolor);
   }
 
   ngAfterViewChecked() : void {
@@ -90,4 +91,9 @@ export class ContactDialogComponent implements OnInit {
     }
   }
 
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
+  }
 }

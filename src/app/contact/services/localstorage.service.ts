@@ -8,11 +8,11 @@ import { List } from 'linqts';
 import { MapsImageService } from "./maps-image.service";
 
 @Injectable()
-export class ContactService implements ContactStore {
+export class LocalstorageService {
 
   private cKey= "contacts";
 
-  constructor(public mapsImageService: MapsImageService, public snackBar: MdSnackBar) {
+  constructor(public mapsImageService: MapsImageService) {
     let c = localStorage.getItem(this.cKey);
     if (!this.isJSON(c))
       this.initLocalStorage();
@@ -48,9 +48,9 @@ export class ContactService implements ContactStore {
      contact otherwise it creates a new one. */
   addContact(contact: Contact) : Observable<List<Contact>> {
     let contacts = this.readContacts();
-    if (!contact.id) {
+    if (!contact._id) {
       let lastSaved = contacts.Count();
-      contact.id = lastSaved ? lastSaved + 1 : 1;
+      contact._id = lastSaved ? lastSaved + 1 : 1;
     } else {
       let c = this.removeContact(contact);
       contacts = c ? c : new List<Contact>();
@@ -75,15 +75,9 @@ export class ContactService implements ContactStore {
 
   /* Removes contact but doesn't write localstorage */
   public removeContact(contact: Contact) : List<Contact> {
-    let contacts = this.readContacts().Where(c => c.id != contact.id);
+    let contacts = this.readContacts().Where(c => c._id != contact._id);
 
     return contacts;
   }
 
-
-  openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 2000,
-    });
-  }
 }
