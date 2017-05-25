@@ -1,4 +1,6 @@
-<div *ngIf="contacts?._items.length >= 1; else noContacts" fxLayout="column" fxLayoutAlign="space-between center"  fxLayoutGap="30px">
+<div *ngIf="contacts?._items.length >= 1; else noContacts"
+     fxLayout="column" fxLayoutAlign="space-between center"  fxLayoutGap="30px">
+
     <contact-list-item
       *ngFor="let contact of contacts._items"
         [contact]="contact"
@@ -6,8 +8,8 @@
         [delete]="deleteContact"
         [mapsUpdate]="mapsUpdate"
         (click)="selectContact(contact)"></contact-list-item>
+  <p>Showing {{ contacts._items.length }} contact(s)</p>
 
-  <p>Showing {{ contacts.length }} contact(s)</p>
 </div>
 
 <ng-template #noContacts>

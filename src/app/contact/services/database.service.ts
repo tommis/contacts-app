@@ -1,5 +1,7 @@
+///<reference path="../../../../node_modules/@angular/http/src/interfaces.d.ts"/>
 import { Injectable } from '@angular/core';
-import { Http, RequestOptions } from "@angular/http";
+import {Http, Headers, RequestOptions} from "@angular/http";
+
 import { ContactStore } from "./contact-store";
 import { Observable } from "rxjs/Observable";
 import { Contact } from "../models/contact";
@@ -12,24 +14,16 @@ export class DatabaseService  {
 
   private dbUrl = environment.databaseUrl;
 
-  headers;
-  options;
-
   constructor(private http: Http) {
-    this.headers = new Headers({ 'Content-Type': 'application/json' });
-    this.options = new RequestOptions({ headers: this.headers });
 
   }
 
 
-  private requestOptions(contact: Contact) {
-
-    return {
-      "headers": {
-        "If-Match": contact._etag
-      }
-    };
-
+  private requestOptions(contact: Contact): RequestOptions {
+    let headers: Headers = new Headers();
+    headers.append('If-Match', contact._etag);
+    headers.append('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS');
+    return new RequestOptions({ headers: headers });
   }
 
   readContacts() {
@@ -49,7 +43,7 @@ export class DatabaseService  {
   }
 
   deleteContact(contact: Contact) {
-    return this.http.delete(this.dbUrl + '/contact/' + contact._id);
+    return this.http.delete(this.dbUrl + '/contact/' + contact._id, this.requestOptions(contact));
   }
 
 
