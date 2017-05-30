@@ -5,8 +5,8 @@
 from eve import Eve
 from eve_sqlalchemy import SQL
 
-from model import Base
-from settings import SETTINGS
+from models import Base
+from settings import SETTINGS, HOST
 
 application = Eve(auth=None, settings=SETTINGS, data=SQL)
 
@@ -17,4 +17,4 @@ db.Model = Base
 db.create_all()
 
 if __name__ == "__main__":
-    application.run(debug=True)
+  application.run(debug=True, host=HOST)

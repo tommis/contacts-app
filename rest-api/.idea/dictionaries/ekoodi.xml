@@ -4,10 +4,14 @@
       <w>ankka</w>
       <w>ankkalinna</w>
       <w>cardcolor</w>
+      <w>etag</w>
       <w>hupu</w>
       <w>iines</w>
       <w>lupu</w>
+      <w>openshift</w>
       <w>paratiisitie</w>
+      <w>postgresql</w>
+      <w>sqlalchemy</w>
       <w>tupu</w>
     </words>
   </dictionary>

@@ -5,6 +5,7 @@ import { Contact } from "../models/contact";
 import { NgForm } from "@angular/forms";
 import { List } from "linqts";
 import { ContactService } from "../services/contact.service";
+//import { SnackBarService } from "../services/snackbar.service";
 
 @Component({
   selector: 'app-contact-dialog',
@@ -43,31 +44,33 @@ export class ContactDialogComponent implements OnInit {
     {"color": "Blue grey", "value" : "#607D8B"},
   ];
 
-  constructor(public dialogRef: MdDialogRef<ContactDialogComponent>, public ContactService: ContactService, public snackBar: MdSnackBar) { this.isValid = false; }
+  constructor(public dialogRef: MdDialogRef<ContactDialogComponent>, public ContactService: ContactService) { this.isValid = false; }
 
 
   ngOnInit(): void {
-    this.validate();
     if(!this.contact) {
       this.contact = new Contact;
     }
     else {
       //this.defaultColor =;
     }
+
+        this.validate();
+
   }
 
-  handleContactSubmit(contact) {
-    this.ContactService.addContact(contact).finally(
+  handleContactSubmit() {
+    this.ContactService.addContact(this.contact).finally(
       () => {
-        if(!contact.id) {
-          this.openSnackBar("Added contact", "dismiss");
+        if(!this.contact._id) {
+          //this.snack.openSnackBar("Added contact", "dismiss");
         }
         else {
-          this.openSnackBar("Edited contact", "dismiss");
+          //this.snack.openSnackBar("Edited contact", "dismiss");
         }
       }
     ).subscribe(
-      contacts => this.contacts = this.ContactService.readContacts()
+      contacts => this.contacts = this.ContactService.getContacts()
 
     );
 
@@ -91,9 +94,4 @@ export class ContactDialogComponent implements OnInit {
     }
   }
 
-  openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 2000,
-    });
-  }
 }

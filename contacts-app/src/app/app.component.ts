@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
   contactDialog(editContact?: Contact) {
     this.dialogRef = this.dialog.open(ContactDialogComponent);
     if (editContact._id  === null)
-      this.dialogRef.componentInstance.contact = new Contact();
+      this.dialogRef.componentInstance.contact = null;
     else
       this.dialogRef.componentInstance.contact = editContact;
 

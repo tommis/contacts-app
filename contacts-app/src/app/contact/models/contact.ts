@@ -1,4 +1,3 @@
-import DateTimeFormat = Intl.DateTimeFormat;
 interface ContactI {
   _id: number;
 
@@ -41,4 +40,5 @@ export class Contact implements ContactI {
     this.addressvalid = addressValid;
     this.imgcachekey = imgCacheKey;
   }
+
 }

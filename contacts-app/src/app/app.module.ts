@@ -17,7 +17,7 @@ import { MapsImageService } from "./contact/services/maps-image.service";
 import { MapsImageComponent } from './contact/maps-image/maps-image.component';
 import { ContactService } from "./contact/services/contact.service";
 import { DatabaseService } from "./contact/services/database.service";
-
+import { SnackBarService } from "./contact/services/snackbar.service";
 
 
 @NgModule({
@@ -41,7 +41,8 @@ import { DatabaseService } from "./contact/services/database.service";
     ContactService,
     DatabaseService,
     LocalstorageService,
-    MapsImageService
+    MapsImageService,
+    SnackBarService
   ],
   entryComponents: [
     ContactDialogComponent

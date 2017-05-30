@@ -4,7 +4,7 @@
 """
 import os
 
-from model import Contact
+from models import Contact
 
 pg_url = 'postgresql://postgres@192.168.99.100:32772/postgres'
 
@@ -14,18 +14,20 @@ if 'OPENSHIFT_POSTGRESQL_DB_HOST' in os.environ:
     os.environ['OPENSHIFT_POSTGRESQL_DB_PORT'],
     os.environ['OPENSHIFT_APP_NAME'])
 
+HOST = 'localhost'
+
 SETTINGS = {
-  'SERVER_NAME': 'localhost:5000',
+  'SERVER_NAME': HOST + ':5000',
   'DEBUG': True,
   'SQLALCHEMY_DATABASE_URI': pg_url,
   'RESOURCE_METHODS': ['POST', 'GET'],
-  'ITEM_METHODS': ['GET', 'PATCH', 'DELETE'],
-  'XML': False,
-  'JSON': True,
+  'ITEM_METHODS': ['GET', 'PATCH', 'PUT', 'DELETE'],
+  'XML': False, 'JSON': True,
   'X_DOMAINS': '*',
-  'X_HEADERS': ['Authorization','Content-type'],
+  'X_HEADERS': ['Authorization','Content-type','If-Match','Access-Control-Allow-Methods'],
+  'X_EXPOSE_HEADERS': 'If-Match',
   'SQLALCHEMY_TRACK_MODIFICATIONS': False,
   'DOMAIN': {
-    'contact': Contact._eve_schema['contact'],
+    'contacts': Contact._eve_schema['contact'],
   },
 }

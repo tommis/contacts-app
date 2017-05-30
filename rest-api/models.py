@@ -29,3 +29,7 @@ class Contact(CommonColumns):
     address = Column(String(200))
     cardcolor = Column(String(8))
 
+    def __repr__(self):
+        return '<Contact {0} {1}>' % self.lastname, self.firstname
+
+

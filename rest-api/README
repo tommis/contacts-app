@@ -1,0 +1,10 @@
+* Running server
+
+python main.py
+
+
+* Manaage.py
+
+# Populate db with example data
+
+python manage.py populate
