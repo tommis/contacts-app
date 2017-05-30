@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { LocalstorageService } from "./localstorage.service";
 import { DatabaseService } from "./database.service";
 import { environment } from "../../../environments/environment";
 import { ContactStore } from "./contact-store";
@@ -9,7 +8,8 @@ import { Contact } from "../models/contact";
 export class ContactService {
   private contactStore;
 
-  constructor(localStorage: LocalstorageService, database: DatabaseService) {
+  constructor(database: DatabaseService) {
+        let localStorage = undefined;
         this.contactStore = environment.databaseUrl ? database : localStorage;
   }
 

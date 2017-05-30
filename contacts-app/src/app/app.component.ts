@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { Contact } from './contact/models/contact';
-import { LocalstorageService } from "./contact/services/localstorage.service";
 import { MdDialog } from "@angular/material";
 import { ContactDialogComponent } from "./contact/contact-dialog/contact-dialog.component";
 import { List } from "linqts";
@@ -30,9 +29,7 @@ export class AppComponent implements OnInit {
   private dialogRef;
   contactDialog(editContact?: Contact) {
     this.dialogRef = this.dialog.open(ContactDialogComponent);
-    if (editContact._id  === null)
-      this.dialogRef.componentInstance.contact = null;
-    else
+    if (editContact && editContact._id)
       this.dialogRef.componentInstance.contact = editContact;
 
     return this.dialogRef.afterClosed().subscribe(contacts => this.reloadContacts());

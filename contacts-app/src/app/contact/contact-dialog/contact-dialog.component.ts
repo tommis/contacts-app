@@ -1,6 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MdDialogRef, MdSnackBar } from "@angular/material";
-import { LocalstorageService } from "../services/localstorage.service";
 import { Contact } from "../models/contact";
 import { NgForm } from "@angular/forms";
 import { List } from "linqts";

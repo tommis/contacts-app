@@ -27,14 +27,14 @@ export class DatabaseService  {
 
   }
 
-  pick<T, K extends keyof T>(obj: T, ...keys: K[]): Pick<T, K> {
-      const copy = {} as Pick<T, K>;
+  private cleanUp(contact: Contact) {
+      const copy = {};
+      let keys = ['firstname', 'lastname', 'age', 'address', 'cardcolor', 'address', 'addressvalid', 'imgcachekey'];
 
-      keys.forEach(key => copy[key] = obj[key]);
+      keys.forEach(key => copy[key] = contact[key]);
 
-      return copy;
+      return copy as Contact;
   }
-
 
   getContacts() {
     return this.http.get(this.dbUrlContacts).map(res => res.json());
@@ -45,12 +45,10 @@ export class DatabaseService  {
       let id = contact._id;
       let etag = contact['_etag'];
 
-      this.pick(contact, "firstname");
-
-      return this.http.patch(this.dbUrlContacts + id, JSON.stringify(contact), this.requestOptions(etag));
+      return this.http.patch(this.dbUrlContacts + id, JSON.stringify(this.cleanUp(contact)), this.requestOptions(etag));
     }
     else {
-      return this.http.post(this.dbUrlContacts, JSON.stringify(contact), this.requestOptions());
+      return this.http.post(this.dbUrlContacts, JSON.stringify(this.cleanUp(contact)), this.requestOptions());
     }
   }
 

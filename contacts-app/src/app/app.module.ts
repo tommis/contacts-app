@@ -11,7 +11,6 @@ import { ContactViewComponent } from "./contact/contact-view.component";
 import { ContactListComponent } from './contact/contact-list/contact-list.component';
 import { ContactListItemComponent } from './contact/contact-list/contact-list-item.component';
 
-import { LocalstorageService } from './contact/services/localstorage.service';
 import { ContactDialogComponent } from './contact/contact-dialog/contact-dialog.component';
 import { MapsImageService } from "./contact/services/maps-image.service";
 import { MapsImageComponent } from './contact/maps-image/maps-image.component';
@@ -40,7 +39,6 @@ import { SnackBarService } from "./contact/services/snackbar.service";
   providers: [
     ContactService,
     DatabaseService,
-    LocalstorageService,
     MapsImageService,
     SnackBarService
   ],
