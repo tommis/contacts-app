@@ -23,10 +23,6 @@ export class DatabaseService  {
     return new RequestOptions({headers: headers});
   }
 
-  prepareContact(contact: Contact) {
-
-  }
-
   private cleanUp(contact: Contact) {
       const copy = {};
       let keys = ['firstname', 'lastname', 'age', 'address', 'cardcolor', 'address', 'addressvalid', 'imgcachekey'];
@@ -36,16 +32,14 @@ export class DatabaseService  {
       return copy as Contact;
   }
 
+
   getContacts() {
     return this.http.get(this.dbUrlContacts).map(res => res.json());
   }
 
   addContact(contact: Contact) {
     if(contact._id) {
-      let id = contact._id;
-      let etag = contact['_etag'];
-
-      return this.http.patch(this.dbUrlContacts + id, JSON.stringify(this.cleanUp(contact)), this.requestOptions(etag));
+      return this.http.patch(this.dbUrlContacts + contact._id, JSON.stringify(this.cleanUp(contact)), this.requestOptions(contact._etag));
     }
     else {
       return this.http.post(this.dbUrlContacts, JSON.stringify(this.cleanUp(contact)), this.requestOptions());
@@ -55,6 +49,4 @@ export class DatabaseService  {
   deleteContact(contact: Contact) {
     return this.http.delete(this.dbUrlContacts + contact._id, this.requestOptions(contact._etag));
   }
-
-
 }

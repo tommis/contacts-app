@@ -16,8 +16,6 @@ export class AppComponent implements OnInit {
 
   selectedContact: Contact;
 
-  mapsLastUpdated: Date;
-
   constructor(private contactService: ContactService, public dialog: MdDialog) {
 
   }
@@ -44,7 +42,7 @@ export class AppComponent implements OnInit {
 
   onDeleteContact(contact: Contact) {
     this.contactService.deleteContact(contact).subscribe(contacts => this.reloadContacts());
-    console.log("hello");
+    console.log("Deleting contact: " + contact._id);
   }
   onEditContact(contact: Contact) {
     console.log("Editing contact " + contact._id);
@@ -53,11 +51,4 @@ export class AppComponent implements OnInit {
   selectContact(contact: Contact) {
     this.selectedContact = contact;
   }
-
-  mapUpdate(time: Date) {
-    this.mapsLastUpdated = time;
-  }
-
-
-
 }

@@ -4,6 +4,7 @@ import { Contact } from "../models/contact";
 import { NgForm } from "@angular/forms";
 import { List } from "linqts";
 import { ContactService } from "../services/contact.service";
+import { SnackBarService } from "../services/snackbar.service";
 //import { SnackBarService } from "../services/snackbar.service";
 
 @Component({
@@ -43,7 +44,7 @@ export class ContactDialogComponent implements OnInit {
     {"color": "Blue grey", "value" : "#607D8B"},
   ];
 
-  constructor(public dialogRef: MdDialogRef<ContactDialogComponent>, public ContactService: ContactService) { this.isValid = false; }
+  constructor(public dialogRef: MdDialogRef<ContactDialogComponent>, public ContactService: ContactService, private snack: SnackBarService) { this.isValid = false; }
 
 
   ngOnInit(): void {
@@ -62,10 +63,10 @@ export class ContactDialogComponent implements OnInit {
     this.ContactService.addContact(this.contact).finally(
       () => {
         if(!this.contact._id) {
-          //this.snack.openSnackBar("Added contact", "dismiss");
+          this.snack.openSnackBar("Added contact", "dismiss");
         }
         else {
-          //this.snack.openSnackBar("Edited contact", "dismiss");
+          this.snack.openSnackBar("Edited contact", "dismiss");
         }
       }
     ).subscribe(

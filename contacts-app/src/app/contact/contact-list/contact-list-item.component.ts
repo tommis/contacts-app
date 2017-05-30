@@ -36,7 +36,7 @@ import { trigger, state, transition, style, animate, group } from "@angular/anim
   ])
   ]
 })
-export class ContactListItemComponent implements OnInit {
+export class ContactListItemComponent {
   @Input() contact: Contact;
 
   @Input() delete: EventEmitter<Contact>;
@@ -46,24 +46,11 @@ export class ContactListItemComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-    console.log(this.contact);
-  }
-
   deleteContact() {
     this.delete.emit(this.contact);
   }
   editContact() {
     this.edit.emit(this.contact);
   }
-
-  mapsImage() : string {
-    let address = this.contact.address;
-    let mapsUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${address}&size=400x175`;
-
-    this.mapsUpdate.emit(Date.now());
-    return mapsUrl;
-  }
-
 
 }
